@@ -1,5 +1,3 @@
-
-
 def build_roster(registrations):
     """
     Given a list of (student_id, course_id) pairs, build a course roster.
@@ -7,19 +5,23 @@ def build_roster(registrations):
     The result should be a dictionary where:
       - each key is a course id (string)
       - each value is a sorted list of unique student ids (strings)
-        enrolled in that course
+        enrolled in that course.
 
-    Duplicate registrations for the same (student_id, course_id) pair
-    should appear only once in the output.
+    Duplicate registrations for the same pair should appear only once.
     """
 
-    # TODO Step 1–3: Understand the story, and list input, output, and variables.
-    # TODO Step 4: Plan how to group registrations by course and remove duplicates.
-    # TODO Step 5: Write pseudocode for building and then sorting the rosters.
-    # TODO Step 6: Implement your algorithm in Python.
-    # TODO Step 7: Run tests and add your own small manual tests.
-    # TODO Step 8: Check that your solution is roughly O(n log n) time.
-    pass
+    roster = {}
+
+    # Step 1: Build dictionary course_id -> set of unique student_ids
+    for student_id, course_id in registrations:
+        if course_id not in roster:
+            roster[course_id] = set()
+        roster[course_id].add(student_id)
+
+    # Step 2: Convert each set to sorted list
+    result = {course: sorted(students) for course, students in roster.items()}
+
+    return result
 
 
 if __name__ == "__main__":

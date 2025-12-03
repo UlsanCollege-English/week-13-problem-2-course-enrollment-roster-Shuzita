@@ -70,16 +70,17 @@ def test_edge_cases_duplicates_and_case(registrations, expected):
         (
             [("s" + str(i % 5), "C" + str(i % 4)) for i in range(40)],
             {"C0", "C1", "C2", "C3"},
-            5,  # only 5 unique students total
+            5,
         ),
     ],
 )
 def test_larger_and_mixed_inputs(registrations, expected_courses, expected_total_students):
     roster = build_roster(registrations)
     assert set(roster.keys()) == expected_courses
-    # Count unique students across all courses
+
     all_students = set()
     for students in roster.values():
         assert students == sorted(students)
         all_students.update(students)
+
     assert len(all_students) == expected_total_students
